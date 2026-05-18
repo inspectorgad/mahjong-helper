@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.DS_Store
+*.log
+.vite/
+.env
+.env.local
+.env.*.local
+
+# Test scratch files
+test_*.mjs
+/tmp_*

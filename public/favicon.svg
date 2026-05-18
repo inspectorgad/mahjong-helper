@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Background: warm cream like ivory tile face -->
+  <rect width="512" height="512" rx="96" fill="#f5efde"/>
+
+  <!-- Subtle tile frame: a beveled rectangle suggesting a tile -->
+  <rect x="96" y="96" width="320" height="400" rx="32" fill="#fefcf3" stroke="#c9bfa0" stroke-width="4"/>
+
+  <!-- Bevel highlight on top-left edge -->
+  <path d="M 112 124 Q 112 112 124 112 L 388 112" stroke="#ffffff" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- Three colored bars: an original mark, evoking the three suits without
+       copying any actual tile face. Green=bams, red=cracks, blue=dots. -->
+  <rect x="160" y="172" width="192" height="28" rx="6" fill="#3B6D11"/>
+  <rect x="160" y="222" width="192" height="28" rx="6" fill="#A32D2D"/>
+  <rect x="160" y="272" width="192" height="28" rx="6" fill="#185FA5"/>
+
+  <!-- A single character below — "2026" stacked to evoke the card year,
+       in a geometric original style, not copying any tile glyph -->
+  <text x="256" y="420" text-anchor="middle" font-family="Helvetica, Arial, sans-serif"
+        font-weight="700" font-size="68" fill="#2a2a2a" letter-spacing="-2">2026</text>
+</svg>
