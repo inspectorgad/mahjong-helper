@@ -12,7 +12,7 @@ export default defineConfig({
       manifest: {
         name: 'Mahjong Hand Helper',
         short_name: 'Mahjong',
-        description: 'Personal helper for the 2026 NMJL card',
+        description: 'Personal helper for the 2026 the card card',
         theme_color: '#1a1a1a',
         background_color: '#fafafa',
         display: 'standalone',

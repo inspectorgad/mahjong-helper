@@ -1,6 +1,6 @@
 // Card notation parser
 //
-// Converts NMJL card shorthand into structured groups for scoring.
+// Converts the card card shorthand into structured groups for scoring.
 //
 // Notation rules:
 //   - Digits: a run of identical digits = a group of that count.

@@ -1,4 +1,4 @@
-// 2026 NMJL Card — full hand list, transcribed from the physical card.
+// 2026 the card Card — full hand list, transcribed from the physical card.
 //
 // Field reference:
 //   id, section, notation, value

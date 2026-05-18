@@ -62,7 +62,7 @@ export default function App() {
     <div className="app">
       <header className="app-header">
         <h1>Mahjong Helper</h1>
-        <p className="app-sub">2026 NMJL card</p>
+        <p className="app-sub">2026 the card card</p>
       </header>
 
       <section className="section">
@@ -103,7 +103,7 @@ export default function App() {
       </section>
 
       <footer className="app-footer">
-        <p>Personal use only. NMJL card © National Mah Jongg League.</p>
+        <p>Personal use only. the card card © the card publisher.</p>
       </footer>
     </div>
   );

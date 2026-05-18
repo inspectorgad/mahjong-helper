@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "Personal helper for the 2026 NMJL card — suggests hands from a set of tiles.",
+  "description": "Personal helper for the 2026 the card card — suggests hands from a set of tiles.",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
