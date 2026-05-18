@@ -1,6 +1,6 @@
 # Mahjong Hand Helper
 
-Personal helper for the 2026 NMJL card. Takes a set of American Mahjong tiles you've entered and ranks hands from the card by how close you are to completing each one.
+Personal helper American Mahjong tiles you've entered and ranks hands from the card by how close you are to completing each one.
 
 Built as a React PWA — installable to iPhone home screen, works offline once installed.
 
