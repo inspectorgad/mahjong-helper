@@ -8,5 +8,4 @@ dist/
 .env.*.local
 
 # Test scratch files
-test_*.mjs
 /tmp_*
