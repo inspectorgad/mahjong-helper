@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026 Card Reference</title>
+  <style>
+    :root {
+      --bg: #fafaf7;
+      --surface: #ffffff;
+      --surface-2: #f0eee8;
+      --text: #1a1a1a;
+      --text-muted: #6b6b6b;
+      --text-faint: #999;
+      --border: #e0ddd5;
+      --green: #2d6a13;
+      --red: #a82a2a;
+      --blue: #1a5fa5;
+      --black: #1a1a1a;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1a1a1a;
+        --surface: #242420;
+        --surface-2: #2d2d28;
+        --text: #f5f5f0;
+        --text-muted: #a0a09a;
+        --text-faint: #6b6b66;
+        --border: #3a3a35;
+        --green: #97C459;
+        --red: #F09595;
+        --blue: #85B7EB;
+        --black: #f5f5f0;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 24px 16px 48px;
+    }
+    h1 {
+      margin: 0 0 4px;
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 13px;
+      margin-bottom: 24px;
+    }
+    .filter {
+      width: 100%;
+      padding: 10px 12px;
+      font-size: 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+      color: var(--text);
+      margin-bottom: 16px;
+      -webkit-appearance: none;
+    }
+    .section {
+      margin-bottom: 32px;
+    }
+    .section-header {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 12px;
+    }
+    .hand {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 8px;
+    }
+    .hand-notation {
+      font-family: 'SF Mono', 'Menlo', Consolas, monospace;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      margin-bottom: 6px;
+    }
+    .chunk-0 { color: var(--green); }
+    .chunk-1 { color: var(--red); }
+    .chunk-2 { color: var(--blue); }
+    .chunk-x { color: var(--black); }
+    .hand-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .hand-meta-left { flex: 1; }
+    .hand-value {
+      font-family: 'SF Mono', 'Menlo', monospace;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .concealed-badge {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: var(--surface-2);
+      font-size: 10px;
+      font-weight: 600;
+      margin-left: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .note {
+      font-style: italic;
+      color: var(--text-muted);
+    }
+    .hidden { display: none; }
+    .empty {
+      text-align: center;
+      color: var(--text-faint);
+      padding: 40px 0;
+      font-size: 14px;
+    }
+    .footer {
+      margin-top: 48px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      font-size: 11px;
+      color: var(--text-faint);
+      text-align: center;
+    }
+    .legend {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      padding: 10px 12px;
+      background: var(--surface-2);
+      border-radius: 8px;
+    }
+    .legend-item { display: flex; align-items: center; gap: 4px; }
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>2026 Card Reference</h1>
+    <div class="subtitle">All 55 hands. Personal reference.</div>
+
+    <input type="text" class="filter" id="filter" placeholder="Filter by section, pattern, or note…" autocomplete="off">
+
+    <div class="legend">
+      <div class="legend-item"><span class="legend-dot" style="background: var(--green);"></span> 1st suit</div>
+      <div class="legend-item"><span class="legend-dot" style="background: var(--red);"></span> 2nd suit</div>
+      <div class="legend-item"><span class="legend-dot" style="background: var(--blue);"></span> 3rd suit</div>
+      <div class="legend-item"><span class="legend-dot" style="background: var(--black);"></span> Suit-agnostic / winds / flowers</div>
+    </div>
+
+    <div id="content"></div>
+
+    <div class="footer">
+      Personal reference. Card content © its publisher.
+    </div>
+  </div>
+
+  <script>
+    const HANDS = [
+      {id:'2026-1',section:'2026',notation:'222 000 2222 6666',value:25,suits:2,note:'Any 2 Suits'},
+      {id:'2026-2',section:'2026',notation:'2026 DDD 2222 DDD',value:25,suits:2,note:'Any 2 Suits w Matching Dragons, Kong 2 or 6'},
+      {id:'2026-3',section:'2026',notation:'FFF 2026 222 6666',value:25,suits:3,note:'Any 3 Suits'},
+      {id:'2026-4',section:'2026',notation:'22 00 222 666 NEWS',value:30,suits:2,note:'Any 2 Suits, NEWS = 1 of each wind'},
+
+      {id:'2468-1',section:'2468',notation:'222 444 6666 8888',value:25,suits:1,note:'Any 1 or 2 Suits'},
+      {id:'2468-2',section:'2468',notation:'FF 2222 44 66 8888',value:30,suits:2,note:'Any 2 Suits'},
+      {id:'2468-3',section:'2468',notation:'EE 22 444 666 88 WW',value:30,suits:1,note:'Any 1 Suit, East and West Only'},
+      {id:'2468-4',section:'2468',notation:'2222 DDD 8888 DDD',value:25,suits:2,note:'Any 2 Suits w Matching Dragons, These Nos Only'},
+      {id:'2468-5',section:'2468',notation:'FFF 22 44 666 8888',value:25,suits:1,note:'Any 1 Suit'},
+      {id:'2468-6',section:'2468',notation:'2468 2222 D 2222 D',value:25,suits:3,note:'Any 3 Suits, Like Kongs 2,4,6 or 8 w Matching Dragon'},
+      {id:'2468-7',section:'2468',notation:'FFF 2468 FFF 2222',value:30,suits:2,note:'Any 2 Suits, Kong 2,4,6 or 8'},
+      {id:'2468-8',section:'2468',notation:'FF 246 888 246 888',value:30,suits:2,concealed:true,note:'Any 2 Suits'},
+
+      {id:'alike-1',section:'Any Like Numbers',notation:'1111 FFFFFF 1111',value:30,suits:2,note:'Any 2 Suits'},
+      {id:'alike-2',section:'Any Like Numbers',notation:'1111 D 111 D 1111 D',value:25,suits:3,note:'Any 3 Suits w Matching Dragon'},
+      {id:'alike-3',section:'Any Like Numbers',notation:'FF 1111 11 1111 DD',value:25,suits:3,note:'Any 3 Suits w Any Dragon'},
+
+      {id:'quint-1',section:'Quints',notation:'11111 1111 11111',value:40,suits:3,note:'Any 3 Suits, Any Like Nos'},
+      {id:'quint-2',section:'Quints',notation:'FF 11111 22 33333',value:45,suits:1,note:'Any 1 Suit, Any 3 Consec Nos'},
+      {id:'quint-3',section:'Quints',notation:'11111 44444 DDDD',value:40,suits:1,note:'Any 2 Nos in Any 1 Suit w Opposite Dragon'},
+
+      {id:'crun-1',section:'Consecutive Run',notation:'11 222 33 444 5555',value:25,suits:1,note:'Any 1 Suit, These Nos Only'},
+      {id:'crun-2',section:'Consecutive Run',notation:'FFF 1111 234 5555',value:25,suits:2,note:'Any 1 or 2 Suits, Any 5 Consec Nos'},
+      {id:'crun-3',section:'Consecutive Run',notation:'11 22 111 222 3333',value:25,suits:3,note:'Any 3 Suits, Any 3 Consec Nos'},
+      {id:'crun-4',section:'Consecutive Run',notation:'111 222 3333 4444',value:25,suits:2,note:'Any 1 or 2 Suits, Any 4 Consec Nos'},
+      {id:'crun-5',section:'Consecutive Run',notation:'FFF 11 22 333 DDDD',value:25,suits:2,note:'1 or 2 Suits, Any Run, Ds Match Middle No'},
+      {id:'crun-6',section:'Consecutive Run',notation:'1111 FFFFFF 2222',value:30,suits:1,note:'Any 1 Suit, Any 2 Consec Nos'},
+      {id:'crun-7',section:'Consecutive Run',notation:'FF 1111 2222 3333',value:25,suits:3,note:'Any 1 or 3 Suits, Any 3 Consec Nos'},
+      {id:'crun-8',section:'Consecutive Run',notation:'[1 22 333] [1 22 333] 44',value:35,suits:3,concealed:true,note:'Any 3 Suits, Any 4 Consec Nos'},
+
+      {id:'13579-1',section:'13579',notation:'11 333 55 777 9999',value:25,suits:3,note:'Any 1 or 3 Suits'},
+      {id:'13579-2',section:'13579',notation:'111 333 3333 5555',value:25,suits:2,note:'Any 2 Suits'},
+      {id:'13579-3',section:'13579',notation:'NN 1111 33 5555 SS',value:30,suits:1,note:'Any 1 Suit, North and South Only'},
+      {id:'13579-4',section:'13579',notation:'113579 1111 1111',value:25,suits:3,note:'Any 3 Suits, Pair Any Odd No, Kongs Match Pair'},
+      {id:'13579-5',section:'13579',notation:'FFF 11 33 555 DDDD',value:25,suits:1,note:'Any 1 Suit w Matching Dragon'},
+      {id:'13579-6',section:'13579',notation:'11 33 111 333 5555',value:30,suits:3,note:'Any 3 Suits'},
+      {id:'13579-7',section:'13579',notation:'1111 33 55 77 9999',value:35,suits:2,note:'Any 1 or 2 Suits'},
+      {id:'13579-8',section:'13579',notation:'[FF 11 33 55] [111 111]',value:35,suits:3,concealed:true,note:'Any 3 Suits, These Nos Only'},
+      {id:'13579-9',section:'13579',notation:'FF 135 777 999 DDD',value:30,suits:1,concealed:true,note:'Any 1 Suit w Opposite Dragon'},
+
+      {id:'wd-1',section:'Winds - Dragons',notation:'NNNN EEE WWW SSSS',value:25,suits:0,note:''},
+      {id:'wd-2',section:'Winds - Dragons',notation:'1234 DDD DDD DDDD',value:25,suits:1,note:'Any 4 Consec Nos in Any 1 Suit, Any 3 Dragons'},
+      {id:'wd-3',section:'Winds - Dragons',notation:'NNN 1111 1111 SSS',value:25,suits:2,note:'Any Like Odd Nos in Any 2 Suits'},
+      {id:'wd-4',section:'Winds - Dragons',notation:'EEE 2222 2222 WWW',value:25,suits:2,note:'Any Like Even Nos in Any 2 Suits'},
+      {id:'wd-5',section:'Winds - Dragons',notation:'FFF NNNN FFF DDDD',value:25,suits:0,note:'Any Wind, Any Dragon'},
+      {id:'wd-6',section:'Winds - Dragons',notation:'1 N 2 EE 3 WWW 4 SSSS',value:25,suits:1,note:'Any 1 Suit, These Nos Only'},
+      {id:'wd-7',section:'Winds - Dragons',notation:'FF NNNN SSSS DD DD',value:25,suits:0,note:'Any 2 Dragons'},
+      {id:'wd-8',section:'Winds - Dragons',notation:'NN EEE 2026 WWW SS',value:30,suits:1,concealed:true,note:'2026 Any 1 Suit'},
+
+      {id:'369-1',section:'369',notation:'333 666 6666 9999',value:25,suits:2,note:'Any 2 or 3 Suits'},
+      {id:'369-2',section:'369',notation:'33 66 333 666 9999',value:25,suits:3,note:'Any 3 Suits'},
+      {id:'369-3',section:'369',notation:'FFF 33 666 99 DDDD',value:25,suits:1,note:'1 Suit w Matching or Opposite Dragon'},
+      {id:'369-4',section:'369',notation:'33 66 666 999 NEWS',value:30,suits:2,note:'Any 2 Suits'},
+      {id:'369-5',section:'369',notation:'FF 3369 3333 3333',value:25,suits:3,note:'Any 3 Suits, Pair 3,6, or 9, Kongs Match Pair'},
+      {id:'369-6',section:'369',notation:'FF 333 666 999 369',value:30,suits:2,concealed:true,note:'Any 2 Suits'},
+
+      {id:'sp-1',section:'Singles and Pairs',notation:'NN EE WW SS 1D 1D 1D',value:50,suits:3,concealed:true,note:'Any 3 Suits, Any Like No w Matching Dragon'},
+      {id:'sp-2',section:'Singles and Pairs',notation:'[2 4 66 88] [2 4 66 88] [88]',value:50,suits:3,concealed:true,note:'Any 3 Suits, These Nos Only'},
+      {id:'sp-3',section:'Singles and Pairs',notation:'FF 3369 3669 3699',value:50,suits:3,concealed:true,note:'Any 3 Suits'},
+      {id:'sp-4',section:'Singles and Pairs',notation:'11 22 33 44 55 66 77',value:50,suits:1,concealed:true,note:'Any 1 Suit, Any 7 Consec Nos'},
+      {id:'sp-5',section:'Singles and Pairs',notation:'[11 357 99] [11 357 99]',value:50,suits:2,concealed:true,note:'Any 2 Suits'},
+      {id:'sp-6',section:'Singles and Pairs',notation:'FF 2026 2026 2026',value:75,suits:3,concealed:true,note:'Any 3 Suits'},
+    ];
+
+    const SECTION_ORDER = ['2026','2468','Any Like Numbers','Quints','Consecutive Run','13579','Winds - Dragons','369','Singles and Pairs'];
+
+    // Render notation with per-chunk colors. We re-implement minimal chunking
+    // logic here: each space-separated number-token or D-token gets the next
+    // chunk id, unless inside [brackets] which share one chunk.
+    function renderNotation(notation, suits) {
+      let html = '';
+      let chunkId = 0;
+      let inGroup = false;
+      let currentChunk = null;
+
+      const colorClass = (chunk) => {
+        if (suits === 0) return 'chunk-x'; // no suits at all
+        if (suits === 1) return 'chunk-x'; // single suit, render as agnostic
+        return `chunk-${chunk % 3}`;
+      };
+
+      const tokens = notation
+        .replace(/\[/g, ' [ ')
+        .replace(/\]/g, ' ] ')
+        .split(/\s+/)
+        .filter(Boolean);
+
+      for (let ti = 0; ti < tokens.length; ti++) {
+        const tok = tokens[ti];
+        if (tok === '[') { inGroup = true; currentChunk = chunkId++; continue; }
+        if (tok === ']') { inGroup = false; currentChunk = null; continue; }
+
+        const nextChunk = () => inGroup ? currentChunk : chunkId++;
+
+        // Determine if the token has any suit-bearing chars
+        let i = 0;
+        let rendered = '';
+        while (i < tok.length) {
+          const ch = tok[i];
+          let j = i + 1;
+          while (j < tok.length && tok[j] === ch) j++;
+          const count = j - i;
+          const text = tok.substring(i, j);
+
+          if (/[0-9]/.test(ch)) {
+            // Multi-digit chunk like "2026" → all one suit slot
+            if (count === 1 && j < tok.length && /[0-9]/.test(tok[j])) {
+              let k = i;
+              let multitext = '';
+              while (k < tok.length && /[0-9]/.test(tok[k])) {
+                multitext += tok[k];
+                k++;
+              }
+              const chunk = nextChunk();
+              rendered += `<span class="${colorClass(chunk)}">${multitext}</span>`;
+              i = k;
+              continue;
+            }
+            const chunk = nextChunk();
+            rendered += `<span class="${colorClass(chunk)}">${text}</span>`;
+          } else if (ch === 'D') {
+            const chunk = nextChunk();
+            rendered += `<span class="${colorClass(chunk)}">${text}</span>`;
+          } else if (ch === 'F' || ch === 'N' || ch === 'E' || ch === 'W' || ch === 'S') {
+            rendered += `<span class="chunk-x">${text}</span>`;
+          } else {
+            rendered += text;
+          }
+          i = j;
+        }
+        html += rendered + ' ';
+      }
+      return html.trim();
+    }
+
+    function render(filter = '') {
+      const content = document.getElementById('content');
+      const filterLower = filter.toLowerCase().trim();
+
+      const grouped = {};
+      for (const s of SECTION_ORDER) grouped[s] = [];
+      for (const h of HANDS) {
+        const matches = !filterLower ||
+          h.section.toLowerCase().includes(filterLower) ||
+          h.notation.toLowerCase().includes(filterLower) ||
+          (h.note || '').toLowerCase().includes(filterLower);
+        if (matches) grouped[h.section].push(h);
+      }
+
+      let html = '';
+      let anyShown = false;
+      for (const section of SECTION_ORDER) {
+        if (grouped[section].length === 0) continue;
+        anyShown = true;
+        html += `<div class="section">`;
+        html += `<div class="section-header">${section}</div>`;
+        for (const h of grouped[section]) {
+          html += `<div class="hand">`;
+          html += `<div class="hand-notation">${renderNotation(h.notation, h.suits)}</div>`;
+          html += `<div class="hand-meta">`;
+          html += `<div class="hand-meta-left">`;
+          if (h.note) html += `<span class="note">${h.note}</span>`;
+          html += `</div>`;
+          html += `<div><span class="hand-value">${h.concealed ? 'C' : 'x'} ${h.value}</span>`;
+          if (h.concealed) html += `<span class="concealed-badge">concealed</span>`;
+          html += `</div>`;
+          html += `</div></div>`;
+        }
+        html += `</div>`;
+      }
+
+      if (!anyShown) {
+        html = '<div class="empty">No hands match that filter.</div>';
+      }
+
+      content.innerHTML = html;
+    }
+
+    document.getElementById('filter').addEventListener('input', (e) => {
+      render(e.target.value);
+    });
+
+    render();
+  </script>
+</body>
+</html>

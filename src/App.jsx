@@ -5,10 +5,12 @@ import { rankHands } from './lib/suggestEngine.js';
 import Tile from './components/Tile.jsx';
 import HandDisplay from './components/HandDisplay.jsx';
 import Suggestion from './components/Suggestion.jsx';
+import CardReference from './components/CardReference.jsx';
 
 const STORAGE_KEY = 'mahjong-hand-v1';
 
 export default function App() {
+  const [view, setView] = useState('helper'); // 'helper' or 'reference'
   const [hand, setHand] = useState(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
@@ -62,48 +64,69 @@ export default function App() {
     <div className="app">
       <header className="app-header">
         <h1>Mahjong Helper</h1>
-        <p className="app-sub">2026 the card card</p>
+        <p className="app-sub">2026 Card</p>
       </header>
 
-      <section className="section">
-        <h2 className="section-title">Your hand</h2>
-        <HandDisplay hand={hand} onRemove={removeTile} />
-        <div className="hand-meta">
-          <span>{totalTiles} of 13 tiles</span>
-          <div className="actions">
-            <button onClick={loadSample}>Sample</button>
-            <button onClick={clear}>Clear</button>
-          </div>
-        </div>
-      </section>
+      <nav className="tab-nav">
+        <button
+          className={view === 'helper' ? 'tab active' : 'tab'}
+          onClick={() => setView('helper')}
+        >
+          Helper
+        </button>
+        <button
+          className={view === 'reference' ? 'tab active' : 'tab'}
+          onClick={() => setView('reference')}
+        >
+          Card Reference
+        </button>
+      </nav>
 
-      <section className="section">
-        <h2 className="section-title">Add tiles</h2>
-        {TILE_GROUPS.map((g) => (
-          <div key={g.label} className="tile-group">
-            <div className="tile-group-label">{g.label}</div>
-            <div className="tile-grid">
-              {g.tiles.map((t) => (
-                <Tile key={t} code={t} onClick={() => addTile(t)} />
-              ))}
+      {view === 'helper' && (
+        <>
+          <section className="section">
+            <h2 className="section-title">Your hand</h2>
+            <HandDisplay hand={hand} onRemove={removeTile} />
+            <div className="hand-meta">
+              <span>{totalTiles} of 13 tiles</span>
+              <div className="actions">
+                <button onClick={loadSample}>Sample</button>
+                <button onClick={clear}>Clear</button>
+              </div>
             </div>
-          </div>
-        ))}
-      </section>
+          </section>
 
-      <section className="section">
-        <h2 className="section-title">Suggestions</h2>
-        {ranked.length === 0 ? (
-          <p className="empty">Add tiles to see hand suggestions.</p>
-        ) : (
-          ranked.slice(0, 10).map((r) => (
-            <Suggestion key={r.hand.id} result={r} />
-          ))
-        )}
-      </section>
+          <section className="section">
+            <h2 className="section-title">Add tiles</h2>
+            {TILE_GROUPS.map((g) => (
+              <div key={g.label} className="tile-group">
+                <div className="tile-group-label">{g.label}</div>
+                <div className="tile-grid">
+                  {g.tiles.map((t) => (
+                    <Tile key={t} code={t} onClick={() => addTile(t)} />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </section>
+
+          <section className="section">
+            <h2 className="section-title">Suggestions</h2>
+            {ranked.length === 0 ? (
+              <p className="empty">Add tiles to see hand suggestions.</p>
+            ) : (
+              ranked.slice(0, 10).map((r) => (
+                <Suggestion key={r.hand.id} result={r} />
+              ))
+            )}
+          </section>
+        </>
+      )}
+
+      {view === 'reference' && <CardReference />}
 
       <footer className="app-footer">
-        <p>Personal use only. the card card © the card publisher.</p>
+        <p>Personal use only.</p>
       </footer>
     </div>
   );
